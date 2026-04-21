@@ -66,3 +66,9 @@ output:
 logging:
   log_dir: "logs/"
   log_interval: 50
+
+gdrive:
+  enabled: true
+  credentials_path: "credentials.json"
+  token_path: "token.json"
+  drive_folder: "treefinder-atml-runs"

@@ -15,6 +15,7 @@ import logging
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from utils.tools import parse_args, load_config, apply_overrides, setup_logging, set_seed, save_results
+from utils.gdrive_upload import upload_experiment
 from data.dataloader import get_dataloader
 from models import get_model
 from training.trainer import train
@@ -80,6 +81,14 @@ def main():
         if key in metrics:
             v = metrics[key]
             logger.info(f"  {key}: {v:.4f}" if isinstance(v, float) else f"  {key}: {v}")
+
+    # Upload to Google Drive
+    gdrive_cfg = cfg.get("gdrive", {})
+    if gdrive_cfg.get("enabled", False):
+        logger.info("Uploading results to Google Drive...")
+        upload_experiment(exp_name, cfg, gdrive_cfg)
+    else:
+        logger.info("Google Drive upload disabled (gdrive.enabled=false).")
 
     return metrics
 
