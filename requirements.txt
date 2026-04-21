@@ -1,0 +1,30 @@
+# CS-InfoBatch — Python dependencies
+# Install via conda first (handles GDAL for rasterio), then pip for the rest
+# See setup.sh for the full automated setup procedure
+
+# Core ML
+torch>=2.0.0
+torchvision>=0.15.0
+
+# HuggingFace (Mask2Former)
+transformers>=4.35.0
+accelerate>=0.24.0
+
+# Geospatial (install via conda: conda install -c conda-forge rasterio)
+rasterio>=1.3.0
+
+# Data science
+numpy>=1.24.0
+pandas>=2.0.0
+scikit-learn>=1.3.0
+
+# Training utilities
+tqdm>=4.65.0
+pyyaml>=6.0
+matplotlib>=3.7.0
+
+# Experiment tracking (optional but strongly recommended for 24h reset servers)
+# wandb>=0.16.0
+
+# Pillow (image handling)
+Pillow>=10.0.0

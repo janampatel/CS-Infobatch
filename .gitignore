@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Environments
+.env
+*.env
+miniconda3/
+
+# Data (too large for git — stored in cloud storage)
+datasets/
+*.tif
+*.geotiff
+
+InfoBatch-master/
+treefinder-main/
+.claude
+agent.md
+
+# Outputs (too large — save these to cloud/wandb)
+checkpoints/
+# results/ — keep results in git for comparison
+logs/*.log
+
+# HuggingFace cache
+pretrained_weights/
+.cache/
+
+# Splits (reproducible from code, but you CAN commit these as ground truth)
+# splits/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
