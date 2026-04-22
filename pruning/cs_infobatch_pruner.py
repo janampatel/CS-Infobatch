@@ -134,7 +134,7 @@ class CSIBSampler(Sampler):
         ws = self.ib_dataset.warmup_stop
         ps = self.ib_dataset.prune_stop
 
-        if self.epoch <= ws:
+        if self.epoch < ws:
             # Phase 1: warmup — no pruning
             self.ib_dataset.weights.fill_(1.0)
             self.sample_indices = self.ib_dataset.no_prune()

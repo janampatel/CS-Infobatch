@@ -24,7 +24,8 @@ def load_tile(path: str, no_data_value: int = 255, normalize: bool = True):
     raw_label = data[4]
 
     no_data_mask = (raw_label == no_data_value)
-    label = np.clip(raw_label, 0, 1).astype(np.int64)
+    label = raw_label.copy().astype(np.int64)
+    label[no_data_mask] = 0  # map 255 → 0, not 1
 
     ndvi = (nir - r) / (nir + r + 1e-10)
     ndvi = np.clip(ndvi, -1.0, 1.0)
