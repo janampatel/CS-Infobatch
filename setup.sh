@@ -13,7 +13,7 @@
 
 set -e  # exit on first error
 
-# ── Configuration ─────────────────────────────────────────────────────────────
+# ── Configuration ────────────────────────────────────────────────────────────
 REPO_URL="https://github.com/pranshavpatel/cs-infobatch.git"   # TODO: set your repo URL
 REPO_DIR="$(pwd)"
 ENV_NAME="cs-infobatch"
