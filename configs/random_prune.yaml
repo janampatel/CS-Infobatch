@@ -55,7 +55,7 @@ training:
 
 pruner:
   type: "random"
-  prune_ratio: 0.7
+  prune_ratio: 0.3
 
 evaluation:
   metrics: [iou, precision, recall, f1, accuracy]

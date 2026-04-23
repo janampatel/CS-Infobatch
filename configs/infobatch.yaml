@@ -55,7 +55,7 @@ training:
 
 pruner:
   type: "infobatch"
-  prune_ratio: 0.7
+  prune_ratio: 0.3
   delta: 0.875
 
 evaluation:
