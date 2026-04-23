@@ -55,7 +55,7 @@ training:
 
 pruner:
   type: "cs_infobatch"
-  prune_ratio: 0.5
+  prune_ratio: 0.7
   delta: 0.875
   warmup_fraction: 0.1
   ema_beta: 0.7
