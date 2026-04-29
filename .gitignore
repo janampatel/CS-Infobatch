@@ -20,6 +20,7 @@ InfoBatch-master/
 treefinder-main/
 .claude
 agent.md
+token.json
 
 # Outputs (too large — save these to cloud/wandb)
 checkpoints/
