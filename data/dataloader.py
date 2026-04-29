@@ -44,6 +44,7 @@ def get_dataloader(cfg: dict):
             num_workers=nw,
             pin_memory=True,
             persistent_workers=persistent,
+            drop_last=True,
             collate_fn=_ib_collate_fn,
         )
     elif pruner.is_random:
@@ -54,6 +55,7 @@ def get_dataloader(cfg: dict):
             num_workers=nw,
             pin_memory=True,
             persistent_workers=persistent,
+            drop_last=True,
         )
     else:
         train_loader = DataLoader(
@@ -63,6 +65,7 @@ def get_dataloader(cfg: dict):
             num_workers=nw,
             pin_memory=True,
             persistent_workers=persistent,
+            drop_last=True,
         )
 
     val_loader = DataLoader(
