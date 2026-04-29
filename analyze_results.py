@@ -201,7 +201,7 @@ def _roc_auc(labels: np.ndarray, probs: np.ndarray, n_thresholds: int = 300):
     # Sort by fpr ascending for trapezoidal integration
     order = np.argsort(fpr)
     fpr, tpr = fpr[order], tpr[order]
-    auc_val = float(np.trapz(tpr, fpr))
+    auc_val = float(np.trapezoid(tpr, fpr) if hasattr(np, "trapezoid") else np.trapz(tpr, fpr))
     return fpr, tpr, auc_val
 
 
