@@ -44,7 +44,7 @@ PROBS_DIR   = OUTPUT_DIR / "probs"
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 METHODS = ["CS-InfoBatch", "InfoBatch", "Random Prune"]
-RATIOS  = [0.3, 0.5, 0.7]
+RATIOS  = [0.3, 0.5, 0.7, 0.8, 0.9]
 
 COLORS = {
     "CS-InfoBatch": "#1565C0",
@@ -340,7 +340,7 @@ def fig1_f1_vs_ratio(df, path):
     ax.set_xlabel("Prune Ratio")
     ax.set_ylabel("Tree F1  (class 1)")
     ax.set_title("Segmentation Quality vs Pruning Aggressiveness")
-    ax.set_xticks([0.0, 0.3, 0.5, 0.7]); ax.set_xlim(-0.05, 0.78)
+    ax.set_xticks([0.0] + RATIOS); ax.set_xlim(-0.05, max(RATIOS) + 0.05)
     ax.legend(loc="lower left"); ax.grid(True, alpha=0.25)
     fig.tight_layout(); fig.savefig(path); plt.close(fig)
     print(f"Fig 1 saved -> {path.name}")
@@ -353,7 +353,7 @@ def fig2_time_vs_ratio(df, path):
     ax.set_xlabel("Prune Ratio")
     ax.set_ylabel("Training Time (hours)")
     ax.set_title("Training Time vs Pruning Aggressiveness")
-    ax.set_xticks([0.0, 0.3, 0.5, 0.7]); ax.set_xlim(-0.05, 0.78)
+    ax.set_xticks([0.0] + RATIOS); ax.set_xlim(-0.05, max(RATIOS) + 0.05)
     ax.legend(loc="upper right"); ax.grid(True, alpha=0.25)
     fig.tight_layout(); fig.savefig(path); plt.close(fig)
     print(f"Fig 2 saved -> {path.name}")
@@ -396,7 +396,9 @@ def fig4_learning_curves(df, logs, path):
     b_f1 = df.loc[df.method == "Baseline", "class1_f1"].values[0]
     baseline_log = logs.get(("Baseline", 0.0))
 
-    fig, axes = plt.subplots(1, 3, figsize=(15, 5), sharey=True)
+    n = len(RATIOS)
+    fig, axes = plt.subplots(1, n, figsize=(5 * n, 5), sharey=True)
+    if n == 1: axes = [axes]
     fig.suptitle("Validation F1 Learning Curves (by Prune Ratio)", fontsize=13)
 
     for j, ratio in enumerate(RATIOS):
@@ -423,7 +425,9 @@ def fig4_learning_curves(df, logs, path):
 
 def fig5_samples_per_epoch(df, logs, path):
     N_FULL = 11152
-    fig, axes = plt.subplots(1, 3, figsize=(15, 5), sharey=True)
+    n = len(RATIOS)
+    fig, axes = plt.subplots(1, n, figsize=(5 * n, 5), sharey=True)
+    if n == 1: axes = [axes]
     fig.suptitle("Samples per Epoch During Training (Pruning Dynamics)", fontsize=13)
 
     for j, ratio in enumerate(RATIOS):
@@ -501,7 +505,7 @@ def fig7_efficiency(df, path):
     ax.set_xlabel("Prune Ratio")
     ax.set_ylabel("F1 per Training Hour")
     ax.set_title("Training Efficiency  (F1/hour — higher is better)")
-    ax.set_xticks([0.0, 0.3, 0.5, 0.7]); ax.set_xlim(-0.05, 0.78)
+    ax.set_xticks([0.0] + RATIOS); ax.set_xlim(-0.05, max(RATIOS) + 0.05)
     ax.legend(); ax.grid(True, alpha=0.25)
     fig.tight_layout(); fig.savefig(path); plt.close(fig)
     print(f"Fig 7 saved -> {path.name}")
@@ -517,14 +521,14 @@ def fig8_roc_auc(df, path):
     Skips runs without a .npz file.
     """
     b_probs, b_labels = load_probs("Baseline", 0.0)
-    has_any = b_probs is not None or any(
-        load_probs(m, r)[0] is not None for m in METHODS for r in RATIOS
-    )
+    has_any = (PROBS_DIR.exists() and any(PROBS_DIR.glob("*.npz")))
     if not has_any:
         print("Fig 8 (ROC-AUC) skipped — run generate_probs.py first.")
         return
 
-    fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+    n = len(RATIOS)
+    fig, axes = plt.subplots(1, n, figsize=(5 * n, 5))
+    if n == 1: axes = [axes]
     fig.suptitle("ROC Curves by Prune Ratio  (pixel-level, tree class)", fontsize=13)
 
     for j, ratio in enumerate(RATIOS):
@@ -568,21 +572,18 @@ def fig9_calibration(df, path):
     tree pixels), so the calibration curve concentrates near p≈0. The plots
     use a uniform-bin strategy but only show bins with >= 50 samples.
     """
-    has_any = any(
-        load_probs(m, r)[0] is not None
-        for m in (["Baseline"] + METHODS)
-        for r in ([0.0] + RATIOS)
-    )
+    has_any = (PROBS_DIR.exists() and any(PROBS_DIR.glob("*.npz")))
     if not has_any:
         print("Fig 9 (Calibration) skipped — run generate_probs.py first.")
         return
 
-    fig = plt.figure(figsize=(16, 6))
+    n = len(RATIOS)
+    fig = plt.figure(figsize=(5.5 * n, 6))
     fig.suptitle("Calibration (Reliability) Diagrams  (pixel-level, tree class)\n"
                  "Above diagonal = underconfident  |  Below = overconfident",
                  fontsize=12)
 
-    outer_gs = gridspec.GridSpec(1, 3, figure=fig, hspace=0.0, wspace=0.35)
+    outer_gs = gridspec.GridSpec(1, n, figure=fig, hspace=0.0, wspace=0.35)
 
     b_probs, b_labels = load_probs("Baseline", 0.0)
 
@@ -646,16 +647,14 @@ def fig10_prob_dist(df, path):
     X-axis clipped to [0, 0.3] because the tree class is extremely rare
     and most probability mass sits near 0.
     """
-    has_any = any(
-        load_probs(m, r)[0] is not None
-        for m in (["Baseline"] + METHODS)
-        for r in ([0.0] + RATIOS)
-    )
+    has_any = (PROBS_DIR.exists() and any(PROBS_DIR.glob("*.npz")))
     if not has_any:
         print("Fig 10 (Prob distribution) skipped — run generate_probs.py first.")
         return
 
-    fig, axes = plt.subplots(1, 3, figsize=(15, 5), sharey=False)
+    n = len(RATIOS)
+    fig, axes = plt.subplots(1, n, figsize=(5 * n, 5), sharey=False)
+    if n == 1: axes = [axes]
     fig.suptitle("Predicted Probability Distributions  (p(tree) per pixel)\n"
                  "X-axis clipped to [0, 0.3] — most mass is near 0 due to class imbalance",
                  fontsize=12)
