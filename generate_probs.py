@@ -60,6 +60,23 @@ EXPERIMENTS = {
     "random_r0.7_random_prune":        ("configs/random_prune.yaml", 0.7),
     "random_r0.8_random_prune":        ("configs/random_prune.yaml", 0.8),
     "random_r0.9_random_prune":        ("configs/random_prune.yaml", 0.9),
+    # --- DeepLabV3 entries ---
+    "baseline_deeplabv3":                        ("configs/baseline_deeplabv3.yaml",      None),
+    "cs_infobatch_r0.3_deeplabv3":               ("configs/cs_infobatch_deeplabv3.yaml",  0.3),
+    "cs_infobatch_r0.5_deeplabv3":               ("configs/cs_infobatch_deeplabv3.yaml",  0.5),
+    "cs_infobatch_r0.7_deeplabv3":               ("configs/cs_infobatch_deeplabv3.yaml",  0.7),
+    "cs_infobatch_r0.8_deeplabv3":               ("configs/cs_infobatch_deeplabv3.yaml",  0.8),
+    "cs_infobatch_r0.9_deeplabv3":               ("configs/cs_infobatch_deeplabv3.yaml",  0.9),
+    "infobatch_r0.3_deeplabv3":                  ("configs/infobatch_deeplabv3.yaml",     0.3),
+    "infobatch_r0.5_deeplabv3":                  ("configs/infobatch_deeplabv3.yaml",     0.5),
+    "infobatch_r0.7_deeplabv3":                  ("configs/infobatch_deeplabv3.yaml",     0.7),
+    "infobatch_r0.8_deeplabv3":                  ("configs/infobatch_deeplabv3.yaml",     0.8),
+    "infobatch_r0.9_deeplabv3":                  ("configs/infobatch_deeplabv3.yaml",     0.9),
+    "random_r0.3_deeplabv3":                     ("configs/random_prune_deeplabv3.yaml",  0.3),
+    "random_r0.5_deeplabv3":                     ("configs/random_prune_deeplabv3.yaml",  0.5),
+    "random_r0.7_deeplabv3":                     ("configs/random_prune_deeplabv3.yaml",  0.7),
+    "random_r0.8_deeplabv3":                     ("configs/random_prune_deeplabv3.yaml",  0.8),
+    "random_r0.9_deeplabv3":                     ("configs/random_prune_deeplabv3.yaml",  0.9),
 }
 
 
