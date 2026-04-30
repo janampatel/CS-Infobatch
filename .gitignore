@@ -23,7 +23,7 @@ agent.md
 token.json
 
 # Outputs
-checkpoints
+checkpoints/
 # results/ — keep results in git for comparison
 logs/*.log
 

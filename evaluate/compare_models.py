@@ -18,8 +18,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-RESULTS_DIR = Path(__file__).parent / "results"
-OUTPUT_DIR  = Path(__file__).parent / "results_analysis"
+RESULTS_DIR = Path(__file__).parent.parent / "results"
+OUTPUT_DIR  = Path(__file__).parent.parent / "results_analysis"
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 METHODS_ORDER = ["Baseline", "CS-InfoBatch", "InfoBatch", "Random Prune"]

@@ -9,8 +9,8 @@ These files are then read by analyze_results.py for ROC-AUC and calibration plot
 Runtime: ~5-10 min per experiment on GPU (vs hours for training).
 
 Usage (run from project root on the GPU server):
-  python generate_probs.py              # process all known experiments
-  python generate_probs.py --only baseline_baseline cs_infobatch_r0.5_cs_infobatch
+  python evaluate/generate_probs.py              # process all known experiments
+  python evaluate/generate_probs.py --only baseline_baseline cs_infobatch_r0.5_cs_infobatch
 """
 import os
 import sys
@@ -18,8 +18,8 @@ import argparse
 import logging
 from pathlib import Path
 
-# Ensure imports resolve from project root
-PROJECT_ROOT = Path(__file__).parent.resolve()
+# Resolve project root (one level up from evaluate/)
+PROJECT_ROOT = Path(__file__).parent.parent.resolve()
 os.chdir(PROJECT_ROOT)
 sys.path.insert(0, str(PROJECT_ROOT))
 
