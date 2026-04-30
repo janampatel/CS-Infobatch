@@ -76,7 +76,7 @@ All three commands must succeed before continuing.
 
 ## Step 5 — Dataset Setup
 
-The dataset is the 224×224 NAIP tile dataset (`tiles224_v3`) from the treefinder paper. Each tile is a 5-band GeoTIFF: bands 1-4 are R, G, B, NIR and band 5 is the label mask (0=background, 1=tree, 255=no-data).
+The dataset is the 224×224 NAIP tile dataset (`tiles224_v3`) from the [TreeFinder dataset](https://www.kaggle.com/datasets/zhihaow/tree-finder). Each tile is a 5-band GeoTIFF: bands 1-4 are R, G, B, NIR and band 5 is the label mask (0=background, 1=tree, 255=no-data).
 
 Place the dataset in the following structure relative to the project root:
 

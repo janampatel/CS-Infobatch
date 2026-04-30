@@ -35,7 +35,7 @@ Both models receive the same 5-band input `(B, 5, 224, 224)` and produce `(B, 1,
 
 ## Input Data
 
-5-band 224×224 NAIP GeoTIFF tiles from the TreeFinder dataset:
+5-band 224×224 NAIP GeoTIFF tiles from the [TreeFinder dataset](https://www.kaggle.com/datasets/zhihaow/tree-finder):
 
 | Band | Content |
 |------|---------|
