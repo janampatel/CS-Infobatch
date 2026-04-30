@@ -186,7 +186,7 @@ The CS-InfoBatch score `H(z_i)` is used **only** for pruning decisions, never fo
 
 ## Quick Start
 
-See [setup.md](setup.md) for the full installation guide. Short version:
+See [SETUP.md](SETUP.md) for the full installation guide. Short version:
 
 ```bash
 # 1. Install dependencies
