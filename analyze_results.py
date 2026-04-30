@@ -118,7 +118,7 @@ def _parse_dir(name: str):
 def load_all_runs():
     rows, logs = [], {}
     for d in sorted(RESULTS_DIR.iterdir()):
-        if not d.is_dir():
+        if not d.is_dir() or d.name.endswith("_deeplabv3"):
             continue
         method, ratio = _parse_dir(d.name)
         if method is None:
