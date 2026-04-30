@@ -22,8 +22,8 @@ treefinder-main/
 agent.md
 token.json
 
-# Outputs (too large — save these to cloud/wandb)
-checkpoints/
+# Outputs
+checkpoints
 # results/ — keep results in git for comparison
 logs/*.log
 
