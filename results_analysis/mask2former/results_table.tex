@@ -1,0 +1,33 @@
+\begin{table}[ht]
+\centering
+\small
+\caption{Mask2Former: test metrics on NAIP aerial imagery (tree segmentation). $\Delta$F1 = change vs. full-data baseline.}
+\label{tab:main_results_mask2former}
+\begin{tabular}{llccccccc}
+\toprule
+Method & $\rho$ & F1$\uparrow$ & IoU$\uparrow$ & Prec. & Recall & Epochs & Time(h)$\downarrow$ & $\Delta$F1 \\
+\midrule
+Baseline & --- & 0.5323 & 0.3626 & 0.6257 & 0.4631 & 52 & 1.50 & --- \\
+\midrule
+CS-InfoBatch & 0.3 & 0.5227 & 0.3538 & 0.6232 & 0.4501 & 44 & 1.22 & -0.0095 \\
+InfoBatch & 0.3 & 0.5787 & 0.4071 & 0.6274 & 0.5370 & 66 & 1.48 & +0.0464 \\
+Random Prune & 0.3 & 0.5067 & 0.3393 & 0.5891 & 0.4445 & 52 & 1.15 & -0.0255 \\
+\midrule
+CS-InfoBatch & 0.5 & 0.5723 & 0.4008 & 0.6115 & 0.5378 & 62 & 1.59 & +0.0400 \\
+InfoBatch & 0.5 & 0.5093 & 0.3417 & 0.5817 & 0.4530 & 53 & 0.96 & -0.0229 \\
+Random Prune & 0.5 & 0.4308 & 0.2745 & 0.5545 & 0.3522 & 62 & 1.03 & -0.1014 \\
+\midrule
+CS-InfoBatch & 0.7 & 0.5892 & 0.4176 & 0.6001 & 0.5787 & 59 & 1.47 & +0.0569 \\
+InfoBatch & 0.7 & 0.3734 & 0.2296 & 0.4689 & 0.3102 & 53 & 0.73 & -0.1588 \\
+Random Prune & 0.7 & 0.3154 & 0.1872 & 0.3294 & 0.3025 & 50 & 0.56 & -0.2168 \\
+\midrule
+CS-InfoBatch & 0.8 & 0.5406 & 0.3705 & 0.6067 & 0.4876 & 79 & 1.75 & +0.0084 \\
+InfoBatch & 0.8 & 0.3841 & 0.2377 & 0.4981 & 0.3126 & 80 & 0.92 & -0.1481 \\
+Random Prune & 0.8 & 0.2701 & 0.1561 & 0.3221 & 0.2325 & 83 & 0.69 & -0.2622 \\
+\midrule
+CS-InfoBatch & 0.9 & 0.5889 & 0.4173 & 0.6571 & 0.5335 & 50 & 1.24 & +0.0566 \\
+InfoBatch & 0.9 & 0.3337 & 0.2003 & 0.3821 & 0.2962 & 89 & 0.84 & -0.1986 \\
+Random Prune & 0.9 & 0.1021 & 0.0538 & 0.1800 & 0.0713 & 100 & 0.56 & -0.4301 \\
+\bottomrule
+\end{tabular}
+\end{table}
