@@ -15,7 +15,7 @@ miniconda3/
 datasets/
 *.tif
 *.geotiff
-
+table.md
 InfoBatch-master/
 treefinder-main/
 .claude
