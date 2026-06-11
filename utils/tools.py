@@ -15,6 +15,7 @@ def parse_args():
     parser.add_argument("--prune_ratio", type=float, default=None)
     parser.add_argument("--pruner_type", type=str, default=None,
                         choices=["none", "random", "infobatch", "cs_infobatch"])
+    parser.add_argument("--seed", type=int, default=None, help="Override random seed")
     return parser.parse_args()
 
 
@@ -32,6 +33,8 @@ def apply_overrides(args, cfg: dict) -> dict:
         cfg["pruner"]["prune_ratio"] = args.prune_ratio
     if args.pruner_type is not None:
         cfg["pruner"]["type"] = args.pruner_type
+    if args.seed is not None:
+        cfg["experiment"]["seed"] = args.seed
     return cfg
 
 

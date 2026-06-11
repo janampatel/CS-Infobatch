@@ -5,9 +5,9 @@ experiment:
   num_workers: 8
 
 data:
-  root_dir: "dataset_2/"
+  root_dir: "datasets/"
   dataset_dir: "rgb-tiles/cf-s2-kbd-full-raster/"
-  dataset_info: "tile_info.csv"
+  dataset_info: "tile_info_dataset2.csv"
   dataset_name: "dataset2"
   no_data_value: 0
   normalize: true
