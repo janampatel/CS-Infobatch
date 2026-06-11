@@ -12,7 +12,8 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-import rasterio
+
+from data.utils import load_label_band
 
 logger = logging.getLogger(__name__)
 
@@ -25,7 +26,11 @@ def _split_key(cfg: dict) -> str:
     train_r = sp["train_ratio"]
     val_r = sp["train_val_ratio"]
     test_r = sp["test_ratio"]
-    return f"random_seed{seed}_train{train_r}_val{val_r}_test{test_r}"
+    # Optional dataset prefix so different datasets never share a split file.
+    # Absent (legacy configs) → key unchanged, existing split JSONs stay valid.
+    name = cfg["data"].get("dataset_name", "")
+    prefix = f"{name}_" if name else ""
+    return f"{prefix}random_seed{seed}_train{train_r}_val{val_r}_test{test_r}"
 
 
 def _build_tile_paths(tile_filenames: list, cfg: dict) -> list:
@@ -46,12 +51,9 @@ def _compute_cls_labels_and_fg_fraction(tile_paths: list, no_data_value: int) ->
         if i % 500 == 0:
             logger.info(f"Computing cls_labels: {i}/{n}")
         try:
-            with rasterio.open(path) as src:
-                label_band = src.read(5)  # 5th band is the label
-            valid = label_band != no_data_value
-            tree = (label_band == 1) & valid
+            label, valid = load_label_band(path, no_data_value)
             n_valid = valid.sum()
-            n_tree = tree.sum()
+            n_tree = label.sum()
             has_tree = bool(n_tree > 0)
             cls_labels.append(has_tree)
             fg_fracs.append(float(n_tree) / max(n_valid, 1))
