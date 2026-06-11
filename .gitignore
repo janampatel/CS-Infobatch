@@ -16,6 +16,7 @@ datasets/
 *.tif
 *.geotiff
 table.md
+table2.md
 InfoBatch-master/
 treefinder-main/
 .claude
