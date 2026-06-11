@@ -60,7 +60,7 @@ pruner:
   delta: 0.875
   warmup_fraction: 0.1
   ema_beta: 0.7
-  fg_pixel_fraction: 0.003722
+  fg_pixel_fraction: 0.611772
 
 evaluation:
   metrics: [iou, precision, recall, f1, accuracy]
