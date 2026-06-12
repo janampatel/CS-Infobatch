@@ -13,6 +13,7 @@ miniconda3/
 
 # Data (too large for git — stored in cloud storage)
 datasets/
+dataset_2/
 *.tif
 *.geotiff
 table.md
