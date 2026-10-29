@@ -1,0 +1,74 @@
+experiment:
+  id: "baseline"
+  seed: 2025
+  gpu_id: 0
+  num_workers: 8
+
+data:
+  root_dir: "datasets/"
+  dataset_dir: "tiles224_v3/"
+  dataset_info: "tile_info224_v3.csv"
+  no_data_value: 255
+  normalize: true
+  augmentation:
+    random_flip: true
+    rotation:
+      type: "90"
+  split:
+    method: "random"
+    pos_threshold: 0
+    pos_frac: 0.0
+    random:
+      train_ratio: 0.8
+      train_val_ratio: 0.1
+      test_ratio: 0.2
+      shuffle_by_tile: true
+
+model:
+  name: "mask2former"
+  in_channels: 5
+  num_classes: 1
+  image_size: 224
+  pretrain_dir: "pretrained_weights/"
+  mask2former_pretrained:
+    mask2former_weights: "facebook/mask2former-swin-tiny-ade-semantic"
+
+training:
+  epochs: 100
+  batch_size: 32
+  learning_rate: 1.0e-5
+  optimizer:
+    type: "AdamW"
+    weight_decay: 0.01
+  criterion:
+    type: "BCEWithLogitsLoss"
+    w_pos: 1
+  w_dice: 1.0
+  scheduler:
+    type: "ExponentialLR"
+    gamma: 0.95
+  early_stopping:
+    enabled: true
+    monitor: "val_class1_f1"
+    mode: "max"
+    patience: 15
+
+pruner:
+  type: "none"
+
+evaluation:
+  metrics: [iou, precision, recall, f1, accuracy]
+
+output:
+  results_dir: "results/"
+  checkpoint_dir: "checkpoints/"
+
+logging:
+  log_dir: "logs/"
+  log_interval: 50
+
+gdrive:
+  enabled: true
+  credentials_path: "credentials.json"
+  token_path: "token.json"
+  drive_folder: "treefinder-atml-runs"

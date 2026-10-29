@@ -1,0 +1,28 @@
+--extra-index-url https://download.pytorch.org/whl/cu128
+
+# Core ML — pinned to cu128 build (NVIDIA driver 570.x, CUDA 12.8)
+torch==2.11.0+cu128
+torchvision==0.26.0+cu128
+
+# HuggingFace (Mask2Former)
+transformers>=4.35.0
+accelerate>=0.24.0
+
+# Geospatial (requires system GDAL; on bare servers: apt install libgdal-dev)
+rasterio>=1.3.0
+
+# Data science
+numpy>=1.24.0
+pandas>=2.0.0
+scikit-learn>=1.3.0
+scipy>=1.11.0
+
+# Training utilities
+tqdm>=4.65.0
+pyyaml>=6.0
+matplotlib>=3.7.0
+Pillow>=10.0.0
+
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib

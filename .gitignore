@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Environments
+.env
+*.env
+miniconda3/
+
+# Data (too large for git — stored in cloud storage)
+datasets/
+dataset_2/
+*.tif
+*.geotiff
+.claude
+token.json
+credentials.json
+
+# Outputs
+checkpoints/
+# results/ — keep results in git for comparison
+logs/
+
+# Regenerated locally by scripts/build_tables.py and evaluate/analyze_results*.py
+/table.md
+/table2.md
+results_analysis/**/results_table.tex
+
+# HuggingFace cache
+pretrained_weights/
+.cache/
+
+# Splits (reproducible from code, but you CAN commit these as ground truth)
+# splits/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
